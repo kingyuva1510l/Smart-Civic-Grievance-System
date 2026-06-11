@@ -1,0 +1,131 @@
+public class ComplaintHandler {
+
+    public static void applySLAPolicy(List<Complaint__c> complaints){
+
+        Set<String> categories = new Set<String>();
+        Set<String> priorities = new Set<String>();
+        Set<Id> wardIds = new Set<Id>();
+
+        for(Complaint__c comp : complaints){
+            if(comp.Category__c != null && comp.Priority__c != null){
+                categories.add(comp.Category__c);
+                priorities.add(comp.Priority__c);
+            }
+            if(comp.Ward__c != null){
+                wardIds.add(comp.Ward__c);
+            }
+        }
+
+        // Fetch SLA Policies
+        Map<String, SLA_Policy__c> policyMap = new Map<String, SLA_Policy__c>();
+
+        for(SLA_Policy__c policy : [
+            SELECT Id, Category__c, Priority__c, Resolution_Time__c
+            FROM SLA_Policy__c
+            WHERE Active__c = true
+            AND Category__c IN :categories
+            AND Priority__c IN :priorities
+        ]){
+            String key = policy.Category__c + '-' + policy.Priority__c;
+            policyMap.put(key, policy);
+        }
+
+        // Fetch Departments
+        Map<String, Department__c> deptMap = new Map<String, Department__c>();
+
+        for(Department__c dept : [
+            SELECT Id, Category__c
+            FROM Department__c
+            WHERE Active__c = true
+            AND Category__c IN :categories
+        ]){
+            deptMap.put(dept.Category__c, dept);
+        }
+
+        // Fetch Wards
+        Map<Id, Ward__c> wardMap = new Map<Id, Ward__c>(
+            [SELECT Id, Ward_Officer__c FROM Ward__c WHERE Id IN :wardIds]
+        );
+
+        // Apply logic
+        for(Complaint__c comp : complaints){
+
+            // SLA Logic
+            if(comp.Category__c != null && comp.Priority__c != null){
+                String key = comp.Category__c + '-' + comp.Priority__c;
+
+                if(policyMap.containsKey(key)){
+                    SLA_Policy__c matchedPolicy = policyMap.get(key);
+
+                    comp.SLA_Policy__c = matchedPolicy.Id;
+                    comp.Resolution_Deadline__c =
+                        System.now().addHours(Integer.valueOf(matchedPolicy.Resolution_Time__c));
+                    comp.Escalation_Level__c = 0;
+                }
+            }
+
+            // Department Assignment
+            if(comp.Category__c != null && deptMap.containsKey(comp.Category__c)){
+                comp.Department__c = deptMap.get(comp.Category__c).Id;
+            }
+
+            // Ward Officer Assignment
+            if(comp.Ward__c != null && wardMap.containsKey(comp.Ward__c)){
+                comp.Assigned_Officer__c = wardMap.get(comp.Ward__c).Ward_Officer__c;
+            }
+        }
+    }
+
+    // Email Notification Method
+    public static void sendEmailNotification(List<Complaint__c> complaints){
+
+        Set<Id> officerIds = new Set<Id>();
+
+        for(Complaint__c comp : complaints){
+            if(comp.Assigned_Officer__c != null){
+                officerIds.add(comp.Assigned_Officer__c);
+            }
+        }
+
+        if(officerIds.isEmpty()){
+            return;
+        }
+
+        Map<Id, User> officerMap = new Map<Id, User>(
+            [SELECT Id, Name, Email FROM User WHERE Id IN :officerIds]
+        );
+
+        List<Messaging.SingleEmailMessage> emailList = new List<Messaging.SingleEmailMessage>();
+
+        for(Complaint__c comp : complaints){
+
+            if(comp.Assigned_Officer__c != null && officerMap.containsKey(comp.Assigned_Officer__c)){
+
+                User officer = officerMap.get(comp.Assigned_Officer__c);
+
+                Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+
+                mail.setToAddresses(new String[]{ officer.Email });
+
+                mail.setSubject('New Complaint Assigned');
+
+                mail.setPlainTextBody(
+                    'Hello ' + officer.Name + ',\n\n' +
+                    'A new complaint has been assigned to you.\n\n' +
+                    'Complaint Number: ' + comp.Name + '\n' +
+                    'Category: ' + comp.Category__c + '\n' +
+                    'Priority: ' + comp.Priority__c + '\n\n' +
+                    'Please resolve it before the SLA deadline.\n\n' +
+                    'Regards,\n' +
+                    'Civic Complaint Management System'
+                );
+
+                emailList.add(mail);
+            }
+        }
+
+        if(!emailList.isEmpty()){
+            Messaging.sendEmail(emailList);
+        }
+    }
+}

@@ -169,12 +169,11 @@ The system provides real-time visibility into:
 
 ### High-Level Architecture
 ```
-📷 Add architecture diagram here
 ```
 
 ### Complaint Submission Form
 ```
-📷 Add Experience Cloud / portal form screenshot here
+https://github.com/kingyuva1510l/Smart-Civic-Grievance-System/blob/main/Complaint_Form.png
 ```
 
 ### Record-Triggered Flow
@@ -184,7 +183,7 @@ The system provides real-time visibility into:
 
 ### Dashboard & Analytics
 ```
-📷 Add Salesforce dashboard screenshot here
+https://github.com/kingyuva1510l/Smart-Civic-Grievance-System/blob/main/Dashboard.png
 ```
 
 ---

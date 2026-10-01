@@ -1,0 +1,33 @@
+<template>
+
+    <header class="header">
+
+        <div
+            class="logo"
+            onclick={handleHome}>
+
+            🌍 Smart Civic Portal
+
+        </div>
+
+        <nav>
+
+            <a onclick={handleHome}>Home</a>
+
+            <a onclick={handleServices}>Services</a>
+
+            <a onclick={handleAbout}>About</a>
+
+            <a onclick={handleContact}>Contact</a>
+
+            <lightning-button
+                variant="brand"
+                label="Login"
+                onclick={handleLogin}>
+            </lightning-button>
+
+        </nav>
+
+    </header>
+
+</template>

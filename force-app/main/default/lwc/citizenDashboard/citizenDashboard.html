@@ -1,0 +1,43 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Welcome Citizen</h1>
+
+            <p>You have successfully logged into Smart Civic Portal.</p>
+
+            <div class="menu">
+
+                <lightning-button
+                    variant="brand"
+                    label="Submit Complaint"
+                    onclick={handleSubmitComplaint}>
+                </lightning-button>
+
+                <lightning-button
+                    variant="neutral"
+                    label="Track Complaint"
+                    onclick={handleTrackComplaint}>
+                </lightning-button>
+
+                <lightning-button
+                    variant="neutral"
+                    label="My Complaints"
+                    onclick={handleMyComplaints}>
+                </lightning-button>
+
+                <lightning-button
+                    variant="destructive"
+                    label="Logout"
+                    onclick={handleLogout}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

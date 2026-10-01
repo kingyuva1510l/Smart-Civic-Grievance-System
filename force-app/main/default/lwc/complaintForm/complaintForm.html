@@ -1,0 +1,60 @@
+<template>
+
+    <lightning-card title="Submit Complaint">
+
+        <div class="slds-p-around_medium">
+
+            <!-- Title -->
+            <lightning-input
+                label="Title"
+                onchange={handleTitle}>
+            </lightning-input>
+
+            <!-- Description -->
+            <lightning-textarea
+                label="Description"
+                onchange={handleDescription}>
+            </lightning-textarea>
+
+            <!-- Address -->
+            <lightning-input
+                label="Address"
+                onchange={handleAddress}>
+            </lightning-input>
+
+            <!-- Category -->
+            <lightning-combobox
+                label="Category"
+                options={categoryOptions}
+                onchange={handleCategory}>
+            </lightning-combobox>
+
+            <!-- Priority -->
+            <lightning-combobox
+                label="Priority"
+                options={priorityOptions}
+                onchange={handlePriority}>
+            </lightning-combobox>
+
+            <!-- Ward -->
+            <lightning-combobox
+                label="Ward"
+                value={ward}
+                options={wardOptions}
+                onchange={handleWard}>
+            </lightning-combobox>
+
+            <br>
+
+            <!-- Submit Button -->
+            <lightning-button
+                label="Submit Complaint"
+                variant="brand"
+                onclick={submitComplaint}>
+            </lightning-button>
+
+        </div>
+
+    </lightning-card>
+
+</template>

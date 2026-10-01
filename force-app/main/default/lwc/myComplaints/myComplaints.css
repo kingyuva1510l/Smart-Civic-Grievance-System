@@ -1,0 +1,62 @@
+.container{
+
+    background:#f4f7fb;
+
+    min-height:100vh;
+
+    padding:40px;
+
+}
+
+.card{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:#005fb2;
+
+    margin-bottom:25px;
+
+}
+
+.empty{
+
+    text-align:center;
+
+    color:gray;
+
+    padding:40px;
+
+}
+
+.error{
+
+    color:red;
+
+    text-align:center;
+
+    margin-top:20px;
+
+}
+
+.buttonArea{
+
+    margin-top:20px;
+    text-align:center;
+
+}

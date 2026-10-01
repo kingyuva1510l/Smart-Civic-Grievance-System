@@ -1,0 +1,62 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>My Complaints</h1>
+
+            <template lwc:if={loading}>
+
+                <lightning-spinner
+                    alternative-text="Loading">
+                </lightning-spinner>
+
+            </template>
+
+            <template lwc:elseif={complaints.length}>
+
+                <lightning-datatable
+                    key-field="Id"
+                    data={complaints}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+
+            </template>
+
+            <template lwc:else>
+
+                <p class="empty">
+
+                    No complaints found.
+
+                </p>
+
+            </template>
+
+            <template lwc:if={errorMessage}>
+
+                <div class="error">
+
+                    {errorMessage}
+
+                </div>
+
+            </template>
+
+            <div class="buttonArea">
+
+                <lightning-button
+                    label="Back to Dashboard"
+                    variant="neutral"
+                    onclick={handleBack}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

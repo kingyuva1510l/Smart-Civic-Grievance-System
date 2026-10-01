@@ -1,0 +1,61 @@
+.contact{
+
+    padding:70px 40px;
+
+    background:#ffffff;
+
+    text-align:center;
+
+}
+
+.contact h2{
+
+    font-size:32px;
+
+    color:#005fb2;
+
+    margin-bottom:15px;
+
+}
+
+.contact p{
+
+    color:#666;
+
+    margin-bottom:35px;
+
+}
+
+.contact-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    flex-wrap:wrap;
+
+}
+
+.contact-card{
+
+    width:250px;
+
+    background:#f8f9fa;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 12px rgba(0,0,0,.08);
+
+}
+
+.contact-card h3{
+
+    color:#005fb2;
+
+    margin-bottom:10px;
+
+}

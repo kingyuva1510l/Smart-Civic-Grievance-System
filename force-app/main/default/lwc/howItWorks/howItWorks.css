@@ -1,0 +1,80 @@
+.workflow{
+
+    padding:80px 40px;
+
+    background:#f5f7fa;
+
+    text-align:center;
+}
+
+.workflow h2{
+
+    font-size:36px;
+
+    color:#1565c0;
+
+    margin-bottom:50px;
+}
+
+.steps{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+}
+
+.step{
+
+    flex:1;
+
+    min-width:180px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.circle{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    background:#1565c0;
+
+    color:white;
+
+    font-size:24px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    margin-bottom:20px;
+}
+
+.step h3{
+
+    color:#1565c0;
+
+    margin-bottom:10px;
+}
+
+.step p{
+
+    color:#555;
+}

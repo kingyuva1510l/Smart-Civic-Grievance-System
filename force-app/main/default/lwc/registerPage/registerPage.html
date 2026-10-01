@@ -1,0 +1,90 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Citizen Registration</h1>
+
+            <p>Create your account to submit and track complaints.</p>
+
+            <template lwc:if={successMessage}>
+                <div class="success">
+                    {successMessage}
+                </div>
+            </template>
+
+            <template lwc:if={errorMessage}>
+                <div class="error">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <lightning-input
+                label="Full Name"
+                value={fullName}
+                onchange={handleChange}
+                data-field="fullName">
+            </lightning-input>
+
+            <lightning-input
+                type="email"
+                label="Email"
+                value={email}
+                onchange={handleChange}
+                data-field="email">
+            </lightning-input>
+
+            <lightning-input
+                type="tel"
+                label="Phone"
+                value={phone}
+                onchange={handleChange}
+                data-field="phone">
+            </lightning-input>
+
+            <lightning-textarea
+                label="Address"
+                value={address}
+                onchange={handleChange}
+                data-field="address">
+            </lightning-textarea>
+
+            <lightning-input
+                label="Username"
+                value={username}
+                onchange={handleChange}
+                data-field="username">
+            </lightning-input>
+
+            <lightning-input
+                type="password"
+                label="Password"
+                value={password}
+                onchange={handleChange}
+                data-field="password">
+            </lightning-input>
+
+            <lightning-input
+                type="password"
+                label="Confirm Password"
+                value={confirmPassword}
+                onchange={handleChange}
+                data-field="confirmPassword">
+            </lightning-input>
+
+            <div class="buttonArea">
+
+                <lightning-button
+                    variant="brand"
+                    label="Register"
+                    onclick={handleRegister}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

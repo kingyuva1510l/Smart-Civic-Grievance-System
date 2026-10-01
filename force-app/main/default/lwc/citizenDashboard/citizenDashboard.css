@@ -1,0 +1,53 @@
+.container{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f4f7fb;
+
+}
+
+.card{
+
+    width:700px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+    text-align:center;
+
+}
+
+h1{
+
+    color:#005fb2;
+
+}
+
+p{
+
+    color:gray;
+
+    margin-bottom:30px;
+
+}
+
+.menu{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}

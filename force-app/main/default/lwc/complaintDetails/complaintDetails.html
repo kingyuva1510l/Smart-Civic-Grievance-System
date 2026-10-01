@@ -1,0 +1,85 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Complaint Details</h1>
+
+            <template lwc:if={complaint}>
+
+                <table class="detailsTable">
+
+                    <tbody>
+
+                        <tr>
+                            <td>Complaint Number</td>
+                            <td>{complaint.Name}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Category</td>
+                            <td>{complaint.Category__c}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Status</td>
+                            <td>{complaint.Status__c}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Priority</td>
+                            <td>{complaint.Priority__c}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td>{complaint.Address__c}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Description</td>
+                            <td>{complaint.Description__c}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Department</td>
+                            <td>{complaint.Department__r.Name}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Assigned Officer</td>
+                            <td>{complaint.Assigned_Officer__r.Name}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Resolution Deadline</td>
+                            <td>{complaint.Resolution_Deadline__c}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Created Date</td>
+                            <td>{complaint.CreatedDate}</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </template>
+
+            <template lwc:if={errorMessage}>
+
+                <div class="error">
+
+                    {errorMessage}
+
+                </div>
+
+            </template>
+
+        </div>
+
+    </div>
+
+</template>

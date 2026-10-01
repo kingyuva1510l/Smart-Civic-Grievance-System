@@ -1,0 +1,75 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Track Complaint</h1>
+
+            <lightning-input
+                label="Complaint Number"
+                value={complaintNumber}
+                onchange={handleChange}>
+            </lightning-input>
+
+            <div class="buttonArea">
+
+                <lightning-button
+                    variant="brand"
+                    label="Search"
+                    onclick={handleSearch}>
+                </lightning-button>
+
+            </div>
+
+            <template lwc:if={complaint}>
+
+                <div class="details">
+
+                    <p><b>Complaint Number:</b> {complaint.complaintNumber}</p>
+
+                    <p><b>Category:</b> {complaint.category}</p>
+
+                    <p><b>Status:</b> {complaint.status}</p>
+
+                    <p><b>Priority:</b> {complaint.priority}</p>
+
+                    <p><b>Department:</b> {complaint.departmentName}</p>
+
+                    <p><b>Assigned Officer:</b> {complaint.officerName}</p>
+
+                    <p><b>Address:</b> {complaint.address}</p>
+
+                    <p><b>Description:</b> {complaint.description}</p>
+
+                    <p><b>Resolution Deadline:</b> {complaint.resolutionDeadline}</p>
+
+                </div>
+
+            </template>
+
+            <template lwc:if={errorMessage}>
+
+                <div class="error">
+
+                    {errorMessage}
+
+                </div>
+
+            </template>
+
+            <div class="buttonArea">
+
+                <lightning-button
+                    variant="neutral"
+                    label="Back to Dashboard"
+                    onclick={handleBack}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

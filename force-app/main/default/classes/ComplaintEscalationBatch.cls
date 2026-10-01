@@ -1,0 +1,74 @@
+public class ComplaintEscalationBatch implements Schedulable {
+
+    public void execute(SchedulableContext sc) {
+
+        List<Complaint__c> complaintsToUpdate = new List<Complaint__c>();
+        List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
+
+        // Fetch Department Heads
+        Map<Id, Department__c> deptMap = new Map<Id, Department__c>(
+            [SELECT Id, Department_Head__c FROM Department__c]
+        );
+
+        // Fetch complaints eligible for escalation
+        List<Complaint__c> complaints = [
+            SELECT Id, Status__c, Resolution_Deadline__c,
+                   Is_Overdue__c, Escalation_Level__c,
+                   Department__c
+            FROM Complaint__c
+            WHERE Status__c != 'Resolved'
+            AND Resolution_Deadline__c != NULL
+        ];
+
+        for(Complaint__c comp : complaints){
+
+            if(comp.Resolution_Deadline__c < System.now()){
+
+                // Increase escalation level (max 3)
+                if(comp.Escalation_Level__c == null){
+                    comp.Escalation_Level__c = 1;
+                } else if(comp.Escalation_Level__c < 3){
+                    comp.Escalation_Level__c += 1;
+                }
+
+                // Mark overdue
+                comp.Is_Overdue__c = true;
+
+                // Change status
+                comp.Status__c = 'Escalated';
+
+                complaintsToUpdate.add(comp);
+
+                // Send email to Department Head
+                if(comp.Department__c != null && 
+                   deptMap.containsKey(comp.Department__c)){
+
+                    Id headId = deptMap.get(comp.Department__c).Department_Head__c;
+
+                    if(headId != null){
+
+                        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+                        mail.setTargetObjectId(headId);
+                        mail.setSaveAsActivity(false);
+                        mail.setSubject('Complaint Escalated');
+                        mail.setPlainTextBody(
+                            'Complaint ID: ' + comp.Id +
+                            '\nEscalation Level: ' + comp.Escalation_Level__c +
+                            '\nStatus: Escalated'
+                        );
+
+                        emails.add(mail);
+                    }
+                }
+            }
+        }
+
+        if(!complaintsToUpdate.isEmpty()){
+            update complaintsToUpdate;
+        }
+
+        if(!emails.isEmpty()){
+            Messaging.sendEmail(emails);
+        }
+    }
+}

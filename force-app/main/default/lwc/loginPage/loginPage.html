@@ -1,0 +1,52 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Citizen Login</h1>
+
+            <p>Login to access your dashboard.</p>
+
+            <template lwc:if={successMessage}>
+                <div class="success">
+                    {successMessage}
+                </div>
+            </template>
+
+            <template lwc:if={errorMessage}>
+                <div class="error">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <lightning-input
+                label="Username"
+                value={username}
+                onchange={handleChange}
+                data-field="username">
+            </lightning-input>
+
+            <lightning-input
+                type="password"
+                label="Password"
+                value={password}
+                onchange={handleChange}
+                data-field="password">
+            </lightning-input>
+
+            <div class="buttonArea">
+
+                <lightning-button
+                    variant="brand"
+                    label="Login"
+                    onclick={handleLogin}>
+                </lightning-button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

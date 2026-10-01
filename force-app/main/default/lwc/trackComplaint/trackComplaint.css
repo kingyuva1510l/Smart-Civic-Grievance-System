@@ -1,0 +1,79 @@
+.container{
+
+    background:#f4f7fb;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.card{
+
+    width:700px;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:#005fb2;
+
+}
+
+p{
+
+    margin:8px 0;
+
+}
+
+.buttonArea{
+
+    margin-top:20px;
+
+    text-align:center;
+
+}
+
+.result{
+
+    margin-top:30px;
+
+    padding:20px;
+
+    background:#f8f9fa;
+
+    border-radius:10px;
+
+}
+
+.error{
+
+    margin-top:20px;
+
+    padding:12px;
+
+    background:#f8d7da;
+
+    color:#721c24;
+
+    border-radius:6px;
+
+    text-align:center;
+
+}

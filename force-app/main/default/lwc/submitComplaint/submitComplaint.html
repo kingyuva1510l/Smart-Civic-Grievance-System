@@ -1,0 +1,67 @@
+<template>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Submit Complaint</h1>
+
+            <p>Report your civic issue.</p>
+
+            <lightning-combobox
+                label="Issue Type"
+                value={issueType}
+                options={issueOptions}
+                onchange={handleChange}
+                data-field="issueType">
+            </lightning-combobox>
+
+            <lightning-input
+                label="Location"
+                value={location}
+                onchange={handleChange}
+                data-field="location">
+            </lightning-input>
+
+            <lightning-combobox
+                label="Priority"
+                value={priority}
+                options={priorityOptions}
+                onchange={handleChange}
+                data-field="priority">
+            </lightning-combobox>
+
+            <lightning-textarea
+                label="Description"
+                value={description}
+                onchange={handleChange}
+                data-field="description">
+            </lightning-textarea>
+
+            <div class="buttonArea">
+
+                <lightning-button
+                    variant="brand"
+                    label="Submit Complaint"
+                    onclick={handleSubmit}>
+                </lightning-button>
+                <template lwc:if={successMessage}>
+            <div class="success">
+                {successMessage}
+            </div>
+        </template>
+
+        <template lwc:if={errorMessage}>
+            <div class="error">
+                {errorMessage}
+            </div>
+        </template>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</template>
